@@ -1,239 +1,925 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TechForce Solutions - Expert en déploiement d'applications, infrastructure cloud et transformation digitale. Hackathon 2025.">
+    <meta name="keywords" content="DevOps, Infrastructure, Cloud, Support IT, Marketing Digital, Hackathon, GLPI, API">
+    <meta name="author" content="Léa Chen - TechForce Solutions">
+    <title>TechForce Solutions | Innovation & Excellence IT</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-F22XTG0Q1V"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: #1a202c;
+            overflow-x: hidden;
+        }
 
-  gtag('config', 'G-F22XTG0Q1V');
-</script>
-  
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LA RAM – Landing Page</title>
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            padding: 1rem 0;
+        }
 
-  <!-- CSS -->
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', sans-serif;
-    }
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    body {
-      background: radial-gradient(circle at top, #0f2027, #000);
-      color: #fff;
-      overflow-x: hidden;
-    }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+        }
 
-    header {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-    }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
 
-    header::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: url('https://images.unsplash.com/photo-1518770660439-4636190af475') center/cover;
-      opacity: 0.15;
-    }
+        .nav-links a {
+            text-decoration: none;
+            color: #4a5568;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
 
-    .hero {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-      padding: 20px;
-      animation: fadeIn 1.5s ease forwards;
-    }
+        .nav-links a:hover {
+            color: #667eea;
+        }
 
-    .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      letter-spacing: 4px;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
+        .cta-button, .login-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
 
-    .hero p {
-      font-size: 1.2rem;
-      opacity: 0.85;
-      margin-bottom: 40px;
-    }
+        .cta-button:hover, .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
 
-    .btn {
-      padding: 15px 40px;
-      border-radius: 50px;
-      border: 2px solid #00f2ff;
-      background: transparent;
-      color: #00f2ff;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
+        .user-menu {
+            position: relative;
+            display: none;
+        }
 
-    .btn:hover {
-      background: #00f2ff;
-      color: #000;
-      transform: scale(1.05);
-    }
+        .user-menu.active {
+            display: block;
+        }
 
-    section {
-      padding: 100px 10%;
-    }
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-    }
+        .user-dropdown {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            padding: 10px;
+            min-width: 200px;
+            display: none;
+        }
 
-    .card {
-      background: rgba(255,255,255,0.05);
-      border-radius: 20px;
-      padding: 30px;
-      backdrop-filter: blur(10px);
-      transform: translateY(40px);
-      opacity: 0;
-      transition: 0.6s ease;
-    }
+        .user-dropdown.show {
+            display: block;
+        }
 
-    .card.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
+        .user-dropdown div {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
 
-    .card h3 {
-      margin-bottom: 15px;
-      color: #00f2ff;
-    }
+        .user-dropdown div:hover {
+            background: #f7fafc;
+        }
 
-    footer {
-      text-align: center;
-      padding: 40px;
-      font-size: 0.9rem;
-      opacity: 0.6;
-    }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 150px 20px 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            animation: fadeInUp 1s ease;
+        }
 
-    /* Particules */
-    canvas {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-    }
-  </style>
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            animation: fadeInUp 1s ease 0.4s backwards;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #667eea;
+            padding: 1rem 2.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            padding: 1rem 2.5rem;
+            border: 2px solid white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Stats Section */
+        .stats {
+            background: #f7fafc;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #4a5568;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #718096;
+            margin-bottom: 60px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+            border-color: #667eea;
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a202c;
+        }
+
+        .service-description {
+            color: #718096;
+            line-height: 1.8;
+        }
+
+        /* Modal Login */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            width: 100%;
+            max-width: 450px;
+            animation: slideIn 0.5s ease-out;
+            margin: 20px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 28px;
+            cursor: pointer;
+            color: white;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .close-modal:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .login-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .login-form {
+            padding: 40px 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group input.error {
+            border-color: #e74c3c;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .success-message {
+            background: #2ecc71;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .forgot-password:hover {
+            color: #764ba2;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .divider::before {
+            margin-right: 15px;
+        }
+
+        .divider::after {
+            margin-left: 15px;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .signup-link a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .signup-link a:hover {
+            color: #764ba2;
+        }
+
+        .info-box {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 13px;
+        }
+
+        .info-box strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #667eea;
+        }
+
+        .info-box div {
+            margin: 5px 0;
+            color: #555;
+        }
+
+        footer {
+            background: #1a202c;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo" onclick="location.reload()">⚡ TechForce</div>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#team">Équipe</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="login-btn" id="loginNavBtn" onclick="openLoginModal()">Se connecter</button>
+            <div class="user-menu" id="userMenu">
+                <div class="user-avatar" onclick="toggleUserDropdown()" id="userAvatar"></div>
+                <div class="user-dropdown" id="userDropdown">
+                    <div><strong id="userName"></strong></div>
+                    <div style="font-size: 12px; color: #718096; margin-bottom: 10px;" id="userEmail"></div>
+                    <div onclick="viewProfile()">👤 Mon profil</div>
+                    <div onclick="logout()">🚪 Déconnexion</div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-  <canvas id="particles"></canvas>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Innovation & Excellence IT</h1>
+        <p>Votre partenaire pour la transformation digitale et l'excellence opérationnelle</p>
+        <div class="hero-buttons">
+            <button class="btn-primary" onclick="openLoginModal()">Commencer maintenant</button>
+            <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">Découvrir nos services</button>
+        </div>
+    </section>
 
-  <header>
-    <div class="hero">
-      <h1>LA RAM</h1>
-      <p>La mémoire vive nouvelle génération. Rapide. Fluide. Intelligente.</p>
-      <button class="btn">Découvrir</button>
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">99.9%</div>
+                <div class="stat-label">Disponibilité</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">24/7</div>
+                <div class="stat-label">Support</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100+</div>
+                <div class="stat-label">Projets Réussis</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="userCount">4</div>
+                <div class="stat-label">Experts Dédiés</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <h2 class="section-title">Nos Services</h2>
+        <p class="section-subtitle">Des solutions complètes pour votre réussite digitale</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🛡️</div>
+                <h3 class="service-title">Support & Documentation</h3>
+                <p class="service-description">
+                    Assistance technique 24/7 avec gestion des incidents via GLPI. Documentation complète de vos processus métier.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">☁️</div>
+                <h3 class="service-title">Infrastructure & DevOps</h3>
+                <p class="service-description">
+                    Déploiement d'infrastructures cloud sécurisées, automatisation CI/CD, monitoring proactif.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h3 class="service-title">Marketing Digital</h3>
+                <p class="service-description">
+                    Développement de sites web performants, optimisation SEO avancée, analytics détaillées.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🎯</div>
+                <h3 class="service-title">Gestion de Projet</h3>
+                <p class="service-description">
+                    Méthodologie agile, coordination d'équipe experte, planification stratégique.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🔍</div>
+                <h3 class="service-title">Exploration API</h3>
+                <p class="service-description">
+                    Analyse et intégration d'API, documentation technique complète, tests de performance.
+                </p>
+            </div>
+
+            <div class="service-card">
+                <div class="service-icon">🚀</div>
+                <h3 class="service-title">Déploiement Continu</h3>
+                <p class="service-description">
+                    Pipeline CI/CD automatisé, déploiement zero-downtime, scalabilité horizontale.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <h3>🏆 TechForce Solutions - Prêts à relever tous les défis !</h3>
+        <p style="margin-top: 10px; opacity: 0.8;">Hackathon 2025 - Support et Mise à Disposition de Service</p>
+        <p style="margin-top: 20px;">📧 contact@techforce.local | 📞 +33 1 23 45 67 89</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">&copy; 2025 TechForce Solutions. Propulsé par Léa Chen - Marketing Digital</p>
+    </footer>
+
+    <!-- Modal Login -->
+    <div class="modal" id="loginModal">
+        <div class="login-container">
+            <div class="login-header">
+                <span class="close-modal" onclick="closeLoginModal()">&times;</span>
+                <h1 id="formTitle">Bienvenue</h1>
+                <p id="formSubtitle">Connectez-vous à votre compte</p>
+            </div>
+
+            <form class="login-form" id="authForm" onsubmit="handleSubmit(event)">
+                <div class="success-message" id="successMessage"></div>
+
+                <div class="info-box" id="testCredentials">
+                    <strong>🔐 Comptes de test disponibles :</strong>
+                    <div>📧 admin@test.com / mdp: admin123</div>
+                    <div>📧 user@test.com / mdp: user123</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="name" id="nameLabel" style="display: none;">Nom complet</label>
+                    <input type="text" id="name" name="name" placeholder="Votre nom" style="display: none;">
+                    <div class="error-message" id="nameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="votreemail@exemple.com" required>
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+                    <div class="error-message" id="passwordError"></div>
+                </div>
+
+                <div class="form-group" id="confirmPasswordGroup" style="display: none;">
+                    <label for="confirmPassword">Confirmer le mot de passe</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirmez votre mot de passe">
+                    <div class="error-message" id="confirmPasswordError"></div>
+                </div>
+
+                <div class="form-options" id="loginOptions">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <span>Se souvenir</span>
+                    </label>
+                    <a class="forgot-password">Mot de passe oublié ?</a>
+                </div>
+
+                <button type="submit" class="login-button" id="submitButton">Se connecter</button>
+
+                <div class="divider">OU</div>
+
+                <div class="signup-link">
+                    <span id="toggleText">Pas encore de compte ? </span>
+                    <a id="toggleLink" onclick="toggleMode()">S'inscrire</a>
+                </div>
+            </form>
+        </div>
     </div>
-  </header>
 
-  <section>
-    <div class="cards">
-      <div class="card">
-        <h3>Ultra Rapide</h3>
-        <p>Des performances optimisées pour les applications modernes.</p>
-      </div>
-      <div class="card">
-        <h3>Stabilité</h3>
-        <p>Une gestion intelligente des données pour une fiabilité maximale.</p>
-      </div>
-      <div class="card">
-        <h3>Technologie Future</h3>
-        <p>Conçue pour l’IA, le gaming et le cloud computing.</p>
-      </div>
-    </div>
-  </section>
+    <script>
+        // Database simulation
+        const Database = {
+            data: null,
+            
+            init() {
+                const stored = localStorage.getItem('techforce_db');
+                if (stored) {
+                    this.data = JSON.parse(stored);
+                } else {
+                    this.data = {
+                        users: [
+                            {
+                                id: 1,
+                                name: 'Admin',
+                                email: 'admin@test.com',
+                                password: 'admin123',
+                                role: 'admin',
+                                createdAt: new Date().toISOString()
+                            },
+                            {
+                                id: 2,
+                                name: 'User Test',
+                                email: 'user@test.com',
+                                password: 'user123',
+                                role: 'user',
+                                createdAt: new Date().toISOString()
+                            }
+                        ],
+                        createdAt: new Date().toISOString()
+                    };
+                    this.save();
+                }
+            },
+            
+            save() {
+                localStorage.setItem('techforce_db', JSON.stringify(this.data));
+            },
+            
+            login(email, password) {
+                const user = this.data.users.find(u => u.email === email);
+                if (!user) {
+                    return { success: false, message: 'Email non trouvé' };
+                }
+                if (user.password !== password) {
+                    return { success: false, message: 'Mot de passe incorrect' };
+                }
+                return { success: true, user: { ...user, password: undefined } };
+            },
+            
+            register(name, email, password) {
+                const exists = this.data.users.find(u => u.email === email);
+                if (exists) {
+                    return { success: false, message: 'Cet email est déjà utilisé' };
+                }
+                
+                const newUser = {
+                    id: this.data.users.length + 1,
+                    name,
+                    email,
+                    password,
+                    role: 'user',
+                    createdAt: new Date().toISOString()
+                };
+                
+                this.data.users.push(newUser);
+                this.save();
+                return { success: true, user: { ...newUser, password: undefined } };
+            },
+            
+            getAllUsers() {
+                return this.data.users.map(u => ({ ...u, password: undefined }));
+            }
+        };
 
-  <footer>
-    © 2025 LA RAM – Tous droits réservés
-  </footer>
+        // Initialize
+        Database.init();
+        let currentUser = null;
+        let isLoginMode = true;
 
-  <!-- JavaScript -->
-  <script>
-    /* Animation scroll cards */
-    const cards = document.querySelectorAll('.card');
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('show');
+        // Check if user is logged in
+        const storedUser = localStorage.getItem('techforce_user');
+        if (storedUser) {
+            currentUser = JSON.parse(storedUser);
+            updateUIForLoggedInUser();
         }
-      });
-    }, { threshold: 0.2 });
 
-    cards.forEach(card => observer.observe(card));
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
 
-    /* Particules */
-    const canvas = document.getElementById('particles');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+            clearErrors();
+            document.getElementById('authForm').reset();
+        }
 
-    function resize() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
+        function toggleMode() {
+            isLoginMode = !isLoginMode;
+            clearErrors();
+            
+            const formTitle = document.getElementById('formTitle');
+            const formSubtitle = document.getElementById('formSubtitle');
+            const submitButton = document.getElementById('submitButton');
+            const toggleText = document.getElementById('toggleText');
+            const toggleLink = document.getElementById('toggleLink');
+            const nameInput = document.getElementById('name');
+            const nameLabel = document.getElementById('nameLabel');
+            const confirmPasswordGroup = document.getElementById('confirmPasswordGroup');
+            const loginOptions = document.getElementById('loginOptions');
+            const testCredentials = document.getElementById('testCredentials');
+            
+            if (isLoginMode) {
+                formTitle.textContent = 'Bienvenue';
+                formSubtitle.textContent = 'Connectez-vous à votre compte';
+                submitButton.textContent = 'Se connecter';
+                toggleText.textContent = 'Pas encore de compte ? ';
+                toggleLink.textContent = 'S\'inscrire';
+                nameInput.style.display = 'none';
+                nameLabel.style.display = 'none';
+                confirmPasswordGroup.style.display = 'none';
+                loginOptions.style.display = 'flex';
+                testCredentials.style.display = 'block';
+            } else {
+                formTitle.textContent = 'Créer un compte';
+                formSubtitle.textContent = 'Rejoignez-nous aujourd\'hui';
+                submitButton.textContent = 'S\'inscrire';
+                toggleText.textContent = 'Déjà un compte ? ';
+                toggleLink.textContent = 'Se connecter';
+                nameInput.style.display = 'block';
+                nameLabel.style.display = 'block';
+                confirmPasswordGroup.style.display = 'block';
+                loginOptions.style.display = 'none';
+                testCredentials.style.display = 'none';
+            }
+            
+            document.getElementById('authForm').reset();
+        }
 
-    class Particle {
-      constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.6;
-        this.vy = (Math.random() - 0.5) * 0.6;
-        this.size = Math.random() * 2 + 1;
-      }
-      draw() {
-        ctx.fillStyle = 'rgba(0,242,255,0.7)';
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      update() {
-        this.x += this.vx;
-        this.y += this.vy;
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-        this.draw();
-      }
-    }
-
-    function initParticles() {
-      particles = [];
-      for (let i = 0; i < 100; i++) {
-        particles.push(new Particle());
-      }
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => p.update());
-      requestAnimationFrame(animate);
-    }
-
-    initParticles();
-    animate();
-  </script>
-</body>
-</html>
+        function handleSubmit(e) {
+            e.preventDefault();
+            clearErrors();
+            
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const name = document.getElementById('name').value.trim();
